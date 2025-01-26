@@ -30,6 +30,17 @@ class SkuOptions implements SkuOptionsContract
      */
     protected $unique;
 
+    protected $alpha_num;
+
+    protected $limit;
+
+
+    protected $length;
+
+    protected $prefix;
+
+    protected $suffix;
+
     /**
      * Separator value.
      *
@@ -59,7 +70,12 @@ class SkuOptions implements SkuOptionsContract
         $this->from($config['source'])
             ->target($config['field'])
             ->using($config['separator'])
+            ->alphaNumeric($config['alpha_num'])
             ->forceUnique($config['unique'])
+            ->forceLimit($config['limit'])
+            ->forceLength($config['length'])
+            ->prefix($config['prefix'])
+            ->suffix($config['suffix'])
             ->generateOnCreate($config['generate_on_create'])
             ->refreshOnUpdate($config['generate_on_update']);
     }
@@ -113,6 +129,38 @@ class SkuOptions implements SkuOptionsContract
         return $this;
     }
 
+    public function alphaNumeric(bool $value): SkuOptionsContract
+    {
+        $this->alpha_num = $value;
+
+        return $this;
+    }
+
+    public function forceLimit(int $value): SkuOptionsContract
+    {
+        $this->limit = $value;
+
+        return $this;
+    }
+
+    public function forceLength(int $value): SkuOptionsContract
+    {
+        $this->length = $value;
+
+        return $this;
+    }
+
+    public function prefix(string $value): SkuOptionsContract
+    {
+        $this->prefix = $value;
+        return $this;
+    }
+
+    public function suffix(string $value): SkuOptionsContract
+    {
+        $this->suffix = $value;
+        return $this;
+    }
     /**
      * Set the separator value.
      *

@@ -43,6 +43,16 @@ interface SkuOptions
      */
     public function forceUnique(bool $value): self;
 
+    public function alphaNumeric(bool $value): self;
+
+    public function forceLimit(int $value): self;
+
+    public function forceLength(int $value): self;
+
+    public function prefix(string $value): self;
+
+    public function suffix(string $value): self;
+
     /**
      * Set the separator value.
      *

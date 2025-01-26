@@ -36,6 +36,32 @@ return [
         'unique' => true,
 
         /*
+         * Length of string generated from field
+         *
+         */
+        'limit' => 3,
+
+        /*
+         * Length sku generated must be greater then limit
+         *
+         */
+        'length' => 8,
+
+        /*
+         * prefix to sku
+         *
+         */
+        'prefix' => '',
+
+        /*
+         * suffix to sku
+         *
+         */
+        'suffix' => '',
+
+        'alpha_num' => false,
+
+        /*
          * Shall SKUs be generated on create
          *
          */

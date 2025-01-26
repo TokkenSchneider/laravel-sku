@@ -46,7 +46,16 @@ class SkuGenerator implements Jsonable, Renderable, SkuGeneratorContract
         $source = $this->getSourceString();
 
         // now, make Sku
-        return $this->makeSku($source, $this->options->separator, $this->options->unique);
+        return $this->makeSku(
+            $source,
+            $this->options->separator,
+            $this->options->alpha_num,
+            $this->options->unique,
+            $this->options->limit,
+            $this->options->length,
+            $this->options->prefix,
+            $this->options->suffix
+        );
     }
 
     /**
@@ -73,16 +82,31 @@ class SkuGenerator implements Jsonable, Renderable, SkuGeneratorContract
      * @param  bool  $unique
      * @return string
      */
-    protected function makeSku(string $source, string $separator, bool $unique = false): string
+    protected function makeSku(
+        string $source,
+        string $separator,
+        bool $alpha=false,
+        bool $unique = false,
+        int $limit = 3,
+        int $length = 8,
+        string $prefix = '',
+        string $suffix = ''
+    ): string
     {
         // Make
-        $sku = Str::sku($source, $separator);
+        $sku = Str::sku(
+            $source,
+            $separator,
+            $alpha,
+            $limit,
+            $length
+        );
         // if we are forcing uniques and it already exists, re-try
         if ($unique and $this->exists($sku)) {
             return $this->makeSku($source, $unique);
         }
 
-        return $sku;
+        return $prefix.$sku.$suffix;
     }
 
     /**
